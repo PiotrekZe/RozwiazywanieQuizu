@@ -1,0 +1,47 @@
+﻿<Window x:Class="RozwiazywanieQuizu.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RozwiazywanieQuizu"
+        xmlns:vm="clr-namespace:RozwiazywanieQuizu.ViewModel"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="550" Width="800">
+
+    <Window.DataContext>
+        <vm:QuizViewModel x:Name="viewModel"/>
+    </Window.DataContext>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Text="Pytanie:" />
+        <TextBox Grid.Row="1" Text="{Binding CurrentQuestion}" />
+
+        <ScrollViewer Grid.Row="2" VerticalScrollBarVisibility="Auto">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Odpowiedzi:" />
+                <CheckBox Content="{Binding Answer1}" IsChecked="{Binding IsAnswer1Selected}" />
+                <CheckBox Content="{Binding Answer2}" IsChecked="{Binding IsAnswer2Selected}" />
+                <CheckBox Content="{Binding Answer3}" IsChecked="{Binding IsAnswer3Selected}" />
+                <CheckBox Content="{Binding Answer4}" IsChecked="{Binding IsAnswer4Selected}" />
+            </StackPanel>
+        </ScrollViewer>
+
+        <Label Grid.Row="3" Content="{Binding ElapsedTime}" Margin="0,43,0,330" Grid.RowSpan="2" HorizontalAlignment="Center" HorizontalContentAlignment="Center" />
+
+        <Label Grid.Row="4" Content="{Binding ShowPoints}" Margin="0,72,0,318" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+
+        <Button Grid.Row="4" Content="{Binding NextQuestionContent}" Command="{Binding NextQuestionCommand}" IsEnabled="{Binding NextQuestionEnableCommand}" Margin="0,157,0,143" />
+        <Button Grid.Row="4" Content="Rozpocznij quiz" Command="{Binding QuizCommand}" IsEnabled="{Binding QuizEnableCommand}" Margin="0,296,0,67" />
+
+    </Grid>
+</Window>
